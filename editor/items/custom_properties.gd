@@ -51,6 +51,8 @@ func build_type_options():
 	new_type_option_button.add_icon_item(get_theme_icon("float", "EditorIcons"),"Float", TYPE_FLOAT)
 	new_type_option_button.add_icon_item(get_theme_icon("String", "EditorIcons"),"String", TYPE_STRING)
 	new_type_option_button.add_icon_item(get_theme_icon("Color", "EditorIcons"),"Color", TYPE_COLOR)
+	new_type_option_button.add_icon_item(get_theme_icon("NodePath", "EditorIcons"),"NodePath", TYPE_NODE_PATH)
+	new_type_option_button.add_icon_item(get_theme_icon("Object", "EditorIcons"),"Resource", TYPE_OBJECT)
 
 
 func _property_removed():
@@ -70,6 +72,10 @@ func _on_add_button_pressed():
 			new_item_properties[line_edit.text] = ""
 		TYPE_COLOR:
 			new_item_properties[line_edit.text] = Color()
+		TYPE_NODE_PATH:
+			new_item_properties[line_edit.text] = NodePath()
+		TYPE_OBJECT:
+			new_item_properties[line_edit.text] = Resource.new()
 	item.properties = new_item_properties
 	loading_properties()
 

@@ -12,6 +12,7 @@ signal removed
 @onready var value_type = $ValueType
 @onready var value_bool : CheckBox = $Control/ValueBool
 @onready var value_color = $Control/ValueColor
+@onready var value_node_path = $Control/ValueNodePath
 @onready var no_compatible = $Control/NoCompatible
 
 @onready var remove_confirmation_dialog = $RemoveConfirmationDialog
@@ -48,6 +49,14 @@ func _ready():
 		TYPE_COLOR:
 			value_color.color = value
 			value_color.visible = true
+		TYPE_OBJECT:
+			var picker = EditorResourcePicker.new()
+			picker.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			picker.resource_changed.connect(_on_resource_changed)
+			$Control.add_child(picker)
+		TYPE_NODE_PATH:
+			value_node_path.text = value
+			value_node_path.visible = true
 		_:
 			no_compatible.visible = true
 
@@ -64,6 +73,10 @@ func _on_delete_button_pressed():
 func _on_remove_confirmation_dialog_confirmed():
 	item.properties.erase(key)
 	emit_signal("removed")
+
+
+func _on_resource_changed(new_resource: Resource):
+	item.properties[key] = new_resource
 
 
 func _on_value_line_edit_text_changed(new_text):
@@ -84,3 +97,7 @@ func _on_value_bool_toggled(button_pressed):
 
 func _on_value_color_color_changed(color):
 	item.properties[key] = color
+
+
+func _on_value_node_path_text_changed(new_text: String):
+	item.properties[key] = NodePath(new_text)
