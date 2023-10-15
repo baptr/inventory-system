@@ -22,7 +22,7 @@ data = {
 image = SubResource("Image_ev2dn")
 
 [node name="RecipeItemListEditor" type="Control"]
-custom_minimum_size = Vector2(320, 104)
+custom_minimum_size = Vector2(320, 140)
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_s7e4i")
