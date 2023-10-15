@@ -13,7 +13,7 @@ var database_file_cache: Dictionary = {}
 func _enter_tree():
 	if Engine.is_editor_hint():
 		InventorySettings.prepare()
-		
+
 		_inventory_editor = inventory_editor_scene.instantiate()
 		_inventory_editor.name = "Inventory System"
 		_inventory_editor.set_editor_plugin(self)
@@ -52,7 +52,7 @@ func _get_plugin_icon():
 func _build() -> bool:
 	# Ignore errors in other files if we are just running the test scene
 	if InventorySettings.get_user_value("is_running_test_scene", true): return true
-	
+
 	var can_build: bool = true
 	var is_first_file: bool = true
 	for database_file in database_file_cache.values():

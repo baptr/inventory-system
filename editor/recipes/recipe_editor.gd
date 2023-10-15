@@ -52,14 +52,14 @@ func setup_station():
 		stations_list.append(station)
 	stations_list.append(null)
 	craft_station_type_option_button.add_icon_item(null, "No station")
-	
+
 	for j in stations_list.size():
 		var station = null
 		if j < database.stations_type.size() and j >= 0:
 			station = database.stations_type[j]
 		if station == recipe.station:
 			craft_station_type_option_button.select(j)
-			
+
 
 func setup_ingredients(recipe : Recipe, database : InventoryDatabase):
 	for ingredient_editor in ingredients:
@@ -100,7 +100,7 @@ func load_recipe(recipe : Recipe, database : InventoryDatabase):
 	slot.item = recipe.product.item
 	product_selector.setup(slot, database)
 	time_to_craft_spin_box.value = recipe.time_to_craft
-	setup_product()	
+	setup_product()
 	setup_station()
 	setup_ingredients(recipe, database)
 	setup_byproducts(recipe, database)

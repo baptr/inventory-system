@@ -11,7 +11,7 @@ class_name InventoryItem
 ## [codeblock]
 ## 	extends InventoryItem
 ## 	class_name FoodItem
-## 	
+##
 ## 	@export var satisfies_hunger = 12
 ## [/codeblock]
 

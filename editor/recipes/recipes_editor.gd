@@ -45,7 +45,7 @@ func _apply_theme():
 	super._apply_theme()
 	if not is_instance_valid(search_icon):
 		return
-	
+
 	search_icon.texture = get_theme_icon("Search", "EditorIcons")
 
 
@@ -71,7 +71,7 @@ func _add_new_recipe_to_database(recipe : Recipe):
 	if database.items.is_empty():
 		push_warning("There are no items to create a recipe, create an item first.")
 		return
-	
+
 	recipe.product = Slot.new()
 	var item = current_item
 	if item == null:
@@ -81,9 +81,9 @@ func _add_new_recipe_to_database(recipe : Recipe):
 		item = database.get_item(id)
 	recipe.product.item = item
 	recipe.product.amount = 1
-	
+
 	_add_to_database(recipe)
-	
+
 
 func _add_to_database(recipe : Recipe):
 	database.recipes.append(recipe)

@@ -47,7 +47,7 @@ func update_items_categories_cache():
 
 func add_new_item(item : InventoryItem):
 	items.append(item)
-	update_items_cache()	
+	update_items_cache()
 
 
 func remove_item(item : InventoryItem):
@@ -59,7 +59,7 @@ func remove_item(item : InventoryItem):
 
 func add_new_category(category : ItemCategory):
 	item_categories.append(category)
-	update_items_categories_cache()	
+	update_items_categories_cache()
 
 
 func remove_category(category : ItemCategory):

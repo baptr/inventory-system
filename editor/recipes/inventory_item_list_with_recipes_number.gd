@@ -23,7 +23,7 @@ func load_items(database : InventoryDatabase) -> void:
 		add_item(item)
 	update_item_map()
 	apply_filter()
-	
+
 
 
 func select(item_id : int):
@@ -33,7 +33,7 @@ func select(item_id : int):
 
 func update_item(index : int):
 	var item = item_list_handler[index]
-	var name_to_show : String 
+	var name_to_show : String
 	var icon : Texture2D = null
 	var recipe_count = 0
 	if item != null:

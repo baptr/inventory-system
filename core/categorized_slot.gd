@@ -9,7 +9,7 @@ class_name CategorizedSlot
 		if not Engine.is_editor_hint():
 			for c in accepted_categories:
 				accepted_categories_code |= c.code
-				
+
 var accepted_categories_code := 0
 
 

@@ -45,12 +45,12 @@ func _on_button_pressed():
 		if self.id != new_id:
 			self.id = new_id
 			emit_signal("changed", id)
-			
+
 
 func _check_valid_id():
 	var new_id = int(id_spin_box.value)
 	var valid : bool
-	var warn_text : String 
+	var warn_text : String
 	if ids_must_exist_in_database:
 		valid = new_id == self.id or database.has_item_id(new_id)
 		warn_text = "Item id does not exist in database!"

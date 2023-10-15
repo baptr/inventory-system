@@ -4,8 +4,8 @@ class_name HandItem3D
 @export_node_path("Node3D") var default_hand_item_object_path = NodePath("DefaultHandItem")
 @export_node_path("Hotbar") var hotbar_path = NodePath("../InventoryHandler/Hotbar")
 
-@onready var default_hand_item_object := get_node(default_hand_item_object_path) 
-@onready var hotbar : Hotbar = get_node(hotbar_path) 
+@onready var default_hand_item_object := get_node(default_hand_item_object_path)
+@onready var hotbar : Hotbar = get_node(hotbar_path)
 
 var last_item : InventoryItem = null
 var objects_per_id : Dictionary
@@ -42,4 +42,4 @@ func _clear_last_selection():
 	if last_item == null:
 		return
 	if objects_per_id.has(last_item):
-		objects_per_id[last_item].visible = false	
+		objects_per_id[last_item].visible = false

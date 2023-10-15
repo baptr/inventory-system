@@ -7,7 +7,7 @@ extends Control
 
 
 var database : InventoryDatabase
-var recipes_ui : Array[RecipeItemListEditor] 
+var recipes_ui : Array[RecipeItemListEditor]
 var recipes : Array[Recipe]
 
 

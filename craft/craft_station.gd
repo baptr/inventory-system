@@ -34,7 +34,7 @@ signal opened
 ## Emitted when craft station is closed.
 ## Called inside the [b]close()[/b] function when the craft station is closed.
 signal closed
-		
+
 
 ## [Inventory] used to obtain crafting recipe ingredients
 @export var input_inventory : Inventory
@@ -98,7 +98,7 @@ func _process(delta : float):
 	if not is_crafting():
 		return
 	_process_crafts(delta)
-	
+
 	for i in range(craftings.size() - 1, -1, -1):
 		var c = craftings[i]
 		if c.is_finished():
@@ -117,7 +117,7 @@ func crafting_count() -> int:
 
 
 ## Check if it is possible to create this recipe.
-## It is checked if the crafts limit has been exceeded and then it is checked 
+## It is checked if the crafts limit has been exceeded and then it is checked
 ## if the recipe items contain in the inventory.
 func can_craft(recipe : Recipe) -> bool:
 	if recipe.station != type:
@@ -127,7 +127,7 @@ func can_craft(recipe : Recipe) -> bool:
 	return contains_ingredients(recipe)
 
 
-## Returns true if the input [Inventory] of this station contains the 
+## Returns true if the input [Inventory] of this station contains the
 ## ingredients of the [Recipe] sent by parameter.
 func contains_ingredients(recipe : Recipe) -> bool:
 	for slot in recipe.ingredients:
@@ -137,7 +137,7 @@ func contains_ingredients(recipe : Recipe) -> bool:
 
 
 ## Starts a new craft by [Recipe] sent by parameter.
-## Note: This new craft will only be created if it has ingredients in the input 
+## Note: This new craft will only be created if it has ingredients in the input
 ## [Inventory] and it is possible to add a new craft at the station.
 func craft(recipe_index : int):
 	var recipe := database.recipes[recipe_index]
@@ -150,7 +150,7 @@ func craft(recipe_index : int):
 	_add_crafting(recipe_index, recipe)
 
 
-## This function removes a craft from the crafting list, 
+## This function removes a craft from the crafting list,
 ## returning the ingredients to the input inventory.
 func cancel_craft(crafting_index : int):
 	if crafting_index < 0 or crafting_index >= craftings.size():
@@ -161,8 +161,8 @@ func cancel_craft(crafting_index : int):
 		for ingredient in recipe.ingredients:
 			input_inventory.add(ingredient.item, ingredient.amount)
 	_remove_crafting(crafting_index)
-	
-	
+
+
 ## Opens the craft station and returns true if done successfully.
 ## Emits the [b]opened[/b] signal if the was previously closed.
 func open() -> bool:
@@ -171,7 +171,7 @@ func open() -> bool:
 		emit_signal("opened")
 		return true
 	return false
-	
+
 
 ## Closes the craft station and returns true if done successfully.
 ## Emits the [b]closed[/b] signal if was previously open.
@@ -196,7 +196,7 @@ func _process_crafts(delta : float):
 func _finish_crafting(crafting_index : int):
 	var crafting = craftings[crafting_index]
 	var recipe = database.recipes[crafting.recipe_index]
-	
+
 	_remove_crafting(crafting_index)
 	if only_remove_ingredients_after_craft:
 		if not contains_ingredients(recipe):
@@ -226,7 +226,7 @@ func _add_crafting(recipe_index : int, recipe : Recipe):
 	crafting.time = recipe.time_to_craft
 	craftings.append(crafting)
 	emit_signal("crafting_added", craftings.size() - 1)
-	
+
 
 func _remove_crafting(crafting_index : int):
 	if crafting_index >= craftings.size():
@@ -271,25 +271,25 @@ func _get_configuration_warnings() -> PackedStringArray:
 
 ## Class that contain crafting information being processed.
 class Crafting:
-	
+
 	## [Recipe] index of [Inventory Database] recipe list linked to this station.
 	var recipe_index : int
-	
+
 	## Current time of the craft being processed, when it reaches zero the craft is completed
 	var time : float
-	
+
 	## Returns true if the craft was completed
 	func is_finished() -> bool:
 		return time <= 0
-	
+
 	## Function that processes the craft
 	func process(delta : float):
 		time -= delta
-	
+
 	## Converts this craft to a [Dictionary], used for multiplayer synchronization
 	func to_data() -> Array:
 		return [recipe_index,time]
-	
+
 	## Sets crafting values based on a [Dictionary] received by parameter, Used in multiplayer synchronization
 	func from_data(data : Array):
 		recipe_index = data[0]

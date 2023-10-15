@@ -53,7 +53,7 @@ func load_item(item : InventoryItem, database : InventoryDatabase):
 		item_resource_text_edit.text = "No resource path item!"
 		item_name_text_edit.text = "No resource item!"
 		$ScrollContainer.visible = false
-		
+
 	custom_properties.load_item(database, item)
 	categories_in_item.load_item(database, item)
 
@@ -64,10 +64,10 @@ func apply_theme() -> void:
 		return
 	item_icon_edit_button.icon = get_theme_icon("Edit", "EditorIcons")
 	item_icon_edit_button.tooltip_text = "Open Icon Texture2D"
-	
+
 	item_resource_edit_button.icon = get_theme_icon("Edit", "EditorIcons")
 	item_resource_edit_button.tooltip_text = "Open Resource Inventory Item"
-	
+
 	#Dialogs
 	var scale: float = editor_plugin.get_editor_interface().get_editor_scale()
 	icon_file_dialog.min_size = Vector2(600, 500) * scale

@@ -19,7 +19,7 @@ signal closed(craft_station : CraftStation)
 
 
 ## Internal craft-station used for crafts that don't need stations that are in level.
-@export var main_station : CraftStation 
+@export var main_station : CraftStation
 
 
 ## All craft stations currently open by this crafter
@@ -30,7 +30,7 @@ var opened_stations : Array
 ## Returns [code]true[/code] if opened successfully.
 func open(craft_station : CraftStation) -> bool:
 	if opened_stations.has(craft_station):
-		return false 
+		return false
 	if !craft_station.open():
 		return false
 	opened_stations.append(craft_station)

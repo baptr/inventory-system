@@ -76,4 +76,4 @@ func _on_add_button_pressed():
 
 func _on_new_key_line_edit_text_changed(new_text):
 	add_button.disabled = line_edit.text.is_empty()
-	
+

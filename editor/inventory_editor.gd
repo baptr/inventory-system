@@ -77,9 +77,9 @@ func new_file(path: String, content: String = "") -> void:
 #	if open_buffers.has(path):
 #		remove_file_from_open_buffers(path)
 	var database : InventoryDatabase = InventoryDatabase.new()
-	
+
 	ResourceSaver.save(database, path)
-	
+
 	editor_plugin.get_editor_interface().get_resource_filesystem().scan()
 	load_database(database)
 
@@ -91,15 +91,15 @@ func open_file(path: String) -> void:
 		return
 	var database : InventoryDatabase = res as InventoryDatabase
 	load_database(database)
-	
+
 	title_label.text = path
-	
+
 	InventorySettings.add_recent_file(path)
 	build_open_menu()
-	
+
 #	files_list.files = open_buffers.keys()
 #	files_list.select_file(path)
-	
+
 #	self.current_file_path = path
 
 # Apply theme colors and icons to the UI
@@ -108,13 +108,13 @@ func apply_theme() -> void:
 		return
 	new_button.icon = get_theme_icon("New", "EditorIcons")
 	new_button.tooltip_text = "Start a New Database"
-	
+
 	open_button.icon = get_theme_icon("Load", "EditorIcons")
 	open_button.tooltip_text = "Open a Database"
-	
+
 	save_all_button.icon = get_theme_icon("Save", "EditorIcons")
 	save_all_button.tooltip_text = "Save Database"
-	
+
 	# Dialog sizes
 	var scale: float = editor_plugin.get_editor_interface().get_editor_scale()
 	new_dialog.min_size = Vector2(600, 500) * scale
@@ -131,7 +131,7 @@ func build_open_menu() -> void:
 	menu.clear()
 	menu.add_icon_item(get_theme_icon("Load", "EditorIcons"), "Open...", OPEN_OPEN)
 	menu.add_separator()
-	
+
 	var recent_files = InventorySettings.get_recent_files()
 	if recent_files.size() == 0:
 		menu.add_item("Open recent files")
@@ -139,7 +139,7 @@ func build_open_menu() -> void:
 	else:
 		for path in recent_files:
 			menu.add_icon_item(get_theme_icon("File", "EditorIcons"), path)
-			
+
 	menu.add_separator()
 	menu.add_item("Clear recent files", OPEN_CLEAR)
 	if menu.id_pressed.is_connected(_on_open_menu_id_pressed):
@@ -255,6 +255,6 @@ func _on_open_dialog_file_selected(path):
 func _on_open_button_about_to_popup():
 	build_open_menu()
 
-	
+
 func _on_new_recipe_button_pressed():
 	recipes_editor.new_recipe_pressed()

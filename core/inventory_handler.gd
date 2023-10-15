@@ -4,7 +4,7 @@ extends NodeInventorySystemBase
 class_name InventoryHandler
 
 ## Act by changing inventories, opening and closing them, moving items between them, dropping items from them
-## 
+##
 ## Inventory Handler is normally tied to a game agent, such as player.
 
 ## Emitted when the handler has dropped an item.
@@ -53,7 +53,7 @@ var transaction_slot : Slot = Slot.new()
 
 
 ## Drops an amount of an [InventoryItem].
-## The scene to be instantiated from the item is fetched from the [InventoryDatabase] 
+## The scene to be instantiated from the item is fetched from the [InventoryDatabase]
 ## and placed as a child of [code]drop_parent[/code].
 ## For each dropped item a [code]dropped[/code] signal is emitted.
 func drop(item : InventoryItem, amount := 1) -> bool:
@@ -154,7 +154,7 @@ func swap_between_inventories(inventory : Inventory, slot_index : int, other_inv
 ## Returns [code]true[/code] if opened successfully.
 func open(inventory : Inventory) -> bool:
 	if opened_inventories.has(inventory):
-		return false 
+		return false
 	if !inventory.open():
 		return false
 	opened_inventories.append(inventory)

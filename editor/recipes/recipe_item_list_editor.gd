@@ -55,16 +55,16 @@ func update_recipe():
 	else:
 		craftstation_icon.texture = null
 	time_label.text = str(recipe.time_to_craft)+" secs"
-	
+
 	for i in ingredients_list.get_children():
 		i.queue_free()
 	for i in recipe.ingredients:
 		var i_editor = ingredient_item_scene.instantiate()
 		i_editor.setup(i)
 		ingredients_list.add_child(i_editor)
-		
+
 	for i in byproducts_list.get_children():
-		i.queue_free()	
+		i.queue_free()
 	for i in recipe.byproducts:
 		var i_editor = ingredient_item_scene.instantiate()
 		i_editor.setup(i)

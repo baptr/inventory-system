@@ -46,14 +46,14 @@ func _apply_theme():
 func new_data_pressed():
 	if not is_instance_valid(database):
 		return
-	
+
 	new_resource_dialog.popup_centered()
 
 
 func new_data_from_resource_pressed():
 	if not is_instance_valid(database):
 		return
-	
+
 	open_resource_dialog.popup_centered()
 
 

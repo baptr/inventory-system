@@ -10,7 +10,7 @@ func _ready():
 	if slot.item != null:
 		texture_rect.texture = slot.item.icon
 	else:
-		texture_rect.texture = null 
+		texture_rect.texture = null
 	label.text = "X "+str(slot.amount)
 
 

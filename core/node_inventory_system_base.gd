@@ -18,7 +18,7 @@ func _get_configuration_warnings() -> PackedStringArray:
 	if database == null:
 		string_array.append("Database is null!")
 	return string_array
-	
+
 
 func get_item_from_id(id : int) -> InventoryItem:
 	return database.get_item(id)

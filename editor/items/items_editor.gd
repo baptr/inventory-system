@@ -70,7 +70,7 @@ func _on_inventory_item_list_item_popup_menu_requested(at_position):
 	items_popup_menu.add_icon_item(icon, "Remove", ITEM_REMOVE)
 	items_popup_menu.add_icon_item(icon, "Remove and Delete Resource", ITEM_REMOVE_AND_DELETE)
 	items_popup_menu.set_item_disabled(3, true)
-	
+
 	var a = inventory_item_list.get_global_mouse_position()
 	items_popup_menu.position = Vector2(get_viewport().position) + a
 	items_popup_menu.popup()

@@ -135,7 +135,7 @@ func contains(item : InventoryItem, amount := 1) -> bool:
 			if amount_in_inventory >= amount:
 				return true
 	return false
-	
+
 
 ## Returns true if the inventory contains the quantity of the specified category
 func contains_category(category : ItemCategory, amount := 1) -> bool:
@@ -183,7 +183,7 @@ func get_amount() -> int:
 	return amount_in_inventory
 
 
-## Adds a amount of the item to the inventory and 
+## Adds a amount of the item to the inventory and
 ## returns the amount that was left and not added
 func add(item : InventoryItem, amount : int) -> int:
 	var amount_in_interact = amount;
@@ -214,7 +214,7 @@ func add_at(slot_index : int, item : InventoryItem, amount := 1) -> int:
 	return amount_in_interact
 
 
-## Removes a amount of the item from inventory and 
+## Removes a amount of the item from inventory and
 ## returns the amount that was not removed
 func remove(item : InventoryItem, amount := 1) -> int:
 	var amount_in_interact = amount
