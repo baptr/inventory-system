@@ -19,7 +19,7 @@ func _apply_theme():
 	if not is_instance_valid(search_icon):
 		return
 	search_icon.texture = get_theme_icon("Search", "EditorIcons")
-	
+
 
 func on_load_database() -> void:
 	craft_station_type_editor.load_station(null)
@@ -113,4 +113,4 @@ func _on_open_resource_dialog_file_selected(path):
 		load_craft_station_types()
 		editor_plugin.get_editor_interface().get_resource_filesystem().scan()
 		emit_signal("data_changed")
-			
+

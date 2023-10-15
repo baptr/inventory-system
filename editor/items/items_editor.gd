@@ -112,6 +112,8 @@ func _on_new_resource_dialog_file_selected(path):
 		ResourceSaver.save(database, database.resource_path)
 		load_items()
 		editor_plugin.get_editor_interface().get_resource_filesystem().scan()
+		current_data = item
+		item_editor.load_item(item, database)
 		emit_signal("data_changed")
 	else:
 		print(err)
@@ -131,4 +133,6 @@ func _on_open_resource_dialog_file_selected(path):
 		ResourceSaver.save(database, database.resource_path)
 		load_items()
 		editor_plugin.get_editor_interface().get_resource_filesystem().scan()
+		current_data = item
+		item_editor.load_item(item, database)
 		emit_signal("data_changed")

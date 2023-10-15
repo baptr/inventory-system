@@ -34,10 +34,12 @@ filters = PackedStringArray("*.tres ; InventoryItem")
 [node name="RemoveConfirmationDialog" type="ConfirmationDialog" parent="."]
 unique_name_in_owner = true
 size = Vector2i(400, 100)
+dialog_text = "Remove?"
 
 [node name="RemoveAndDeleteConfirmationDialog" type="ConfirmationDialog" parent="."]
 unique_name_in_owner = true
 size = Vector2i(400, 100)
+dialog_text = "Remove and Delete?"
 
 [connection signal="file_selected" from="NewResourceDialog" to="." method="_on_new_resource_dialog_file_selected"]
 [connection signal="file_selected" from="OpenResourceDialog" to="." method="_on_open_resource_dialog_file_selected"]
