@@ -23,8 +23,8 @@ func _apply_theme():
 func on_load_database() -> void:
 	item_category_editor.load_category(null)
 	load_item_categories()
-	
-	
+
+
 func select(category : ItemCategory):
 	item_category_editor.load_category(category)
 
@@ -79,7 +79,7 @@ func _on_item_categories_item_list_item_popup_menu_requested(at_position):
 	item_category_popup_menu.add_icon_item(icon, "Remove", ITEM_REMOVE)
 	item_category_popup_menu.add_icon_item(icon, "Remove and Delete Resource", ITEM_REMOVE_AND_DELETE)
 	item_category_popup_menu.set_item_disabled(3, true)
-	
+
 	var a = item_categories_item_list.get_global_mouse_position()
 	item_category_popup_menu.position = Vector2(get_viewport().position) + a
 	item_category_popup_menu.popup()

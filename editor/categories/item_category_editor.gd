@@ -51,7 +51,7 @@ func apply_theme() -> void:
 
 	resource_edit_button.icon = get_theme_icon("Edit", "EditorIcons")
 	resource_edit_button.tooltip_text = "Open Resource Craft Station Type"
-	
+
 	#Dialogs
 	var scale: float = editor_plugin.get_editor_interface().get_editor_scale()
 	icon_file_dialog.min_size = Vector2(600, 500) * scale

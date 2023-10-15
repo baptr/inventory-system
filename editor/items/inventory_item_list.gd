@@ -20,7 +20,7 @@ var items: Array[InventoryItem] = []:
 		apply_filter()
 	get:
 		return items
-		
+
 var filter: String:
 	set(next_filter):
 		filter = next_filter
@@ -88,15 +88,15 @@ func apply_filter() -> void:
 		var item = item_map[item_id]
 		if item == null:
 			continue
-		
+
 		if filter == "" or item == null or filter.to_lower() in item.name.to_lower(): # search by item name
 			item_list_handler.append(item)
-		
+
 		if item not in item_list_handler: # search by category name
 			for item_category in item.categories:
 				if item not in item_list_handler and filter.to_lower() in item_category.name.to_lower():
 					item_list_handler.append(item)
-					
+
 	update_item_list(item_list_handler)
 
 
@@ -111,7 +111,7 @@ func _on_item_list_item_clicked(index, at_position, mouse_button_index):
 	if not list.is_item_selectable(index):
 		return
 	emit_signal("item_selected", item_list_handler[index], index)
-	
+
 	if mouse_button_index == 2:
 		emit_signal("item_popup_menu_requested", at_position)
 		list.select(index)
