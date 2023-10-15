@@ -33,6 +33,7 @@ func _ready():
 	line_edit.text = key
 #	color_rect.color = colors[typeof(value)]
 	value_type.texture = get_theme_icon(icons_name[typeof(value)], "EditorIcons")
+	no_compatible.visible = false
 	match typeof(value):
 		TYPE_BOOL:
 			value_bool.button_pressed = value
