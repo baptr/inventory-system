@@ -70,12 +70,12 @@ func drop(item : InventoryItem, amount := 1) -> bool:
 ## Add an amount of an [InventoryItem] to a inventory.
 ## If this addition fails and the [code]drop_excess[/code] is true then a drop of the unadded items occurs
 func add_to_inventory(inventory : Inventory, item : InventoryItem, amount := 1, drop_excess := false) -> int:
-	var value_no_added = inventory.add(item, amount)
-	emit_signal("added", item, amount - value_no_added)
-	if (drop_excess):
-		drop(item, value_no_added)
+	var value_not_added = inventory.add(item, amount)
+	emit_signal("added", item, amount - value_not_added)
+	if drop_excess:
+		drop(item, value_not_added)
 		return 0
-	return value_no_added
+	return value_not_added
 
 
 ## Drops a amount of [InventoryItem] from a inventory.
@@ -225,39 +225,46 @@ func to_transaction(slot_index : int, inventory : Inventory, amount : int):
 	var amount_no_removed = inventory.remove_at(slot_index, item, amount)
 	_set_transaction_slot(item, amount - amount_no_removed)
 
+const INT_MAX = (1<<63) - 1
 
 ## Moves transfer slot information to the [code]slot_index[/code] slot of [Inventory].
-func transaction_to_at(slot_index : int, inventory : Inventory):
+func transaction_to_at(slot_index : int, inventory : Inventory, limit := INT_MAX):
 	if not is_transaction_active():
 		return
 	var slot = inventory.slots[slot_index]
 	var item = transaction_slot.item
 	if item == null:
 		return
+	var try = mini(transaction_slot.amount, limit)
+	var held = transaction_slot.amount - try
 	if inventory.is_empty_slot(slot_index) or slot.item == item:
-		var amount_no_add = inventory.add_at(slot_index, item, transaction_slot.amount)
-		_set_transaction_slot(item, amount_no_add)
+		var amount_no_add = inventory.add_at(slot_index, item, try)
+		_set_transaction_slot(item, held+amount_no_add)
 	else:
-		# Different items in slot and other_slot
-		# Check if transaction_slot amount is equal of origin_slot amount
-		var new_amount = transaction_slot.amount
+		# Different items in src and dest, swap them.
 		if slot is CategorizedSlot:
 			var c_slot = slot as CategorizedSlot
 			if not c_slot.is_accept_category(item):
 				return
-		_set_transaction_slot(slot.item, inventory.slots[slot_index].amount)
+		if held > 0:
+			# No place to put overflow
+			return
+		var new_amount = transaction_slot.amount
+		_set_transaction_slot(slot.item, slot.amount)
 		inventory.set_slot(slot_index, item, new_amount)
 
 
 ## Moves transfer slot information to [Inventory].
-func transaction_to(inventory : Inventory):
+func transaction_to(inventory : Inventory, limit := INT_MAX):
 	if not is_transaction_active():
 		return
 	var item = transaction_slot.item
 	if item == null:
 		return
-	var amount_no_add = inventory.add(item, transaction_slot.amount)
-	_set_transaction_slot(item, amount_no_add)
+	var try = mini(transaction_slot.amount, limit)
+	var held = transaction_slot.amount - try
+	var amount_no_add = inventory.add(item, try)
+	_set_transaction_slot(item, held+amount_no_add)
 
 
 ## Return [code]true[/code] if contains information in slot transaction.
