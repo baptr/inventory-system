@@ -2,8 +2,8 @@
 extends InventoryHandler
 class_name NetworkedHandler
 
-## Network version of the InventoryHandler, the main inventory handler calls are 
-## intercepted by this script to propagate rpc calls to the server and later if 
+## Network version of the InventoryHandler, the main inventory handler calls are
+## intercepted by this script to propagate rpc calls to the server and later if
 ## necessary make response rpc calls to the client.
 
 func _ready():
@@ -72,18 +72,18 @@ func to_transaction(slot_index : int , inventory : Inventory, amount : int):
 		to_transaction_rpc(slot_index, inventory.get_path(), amount)
 
 
-func transaction_to_at(slot_index : int, inventory : Inventory):
+func transaction_to_at(slot_index : int, inventory : Inventory, limit := INT_MAX):
 	if not multiplayer.is_server():
-		transaction_to_at_rpc.rpc_id(1, slot_index, inventory.get_path())
+		transaction_to_at_rpc.rpc_id(1, slot_index, inventory.get_path(), limit)
 	else:
-		transaction_to_at_rpc(slot_index, inventory.get_path())
+		transaction_to_at_rpc(slot_index, inventory.get_path(), limit)
 
 
-func transaction_to(inventory : Inventory):
+func transaction_to(inventory : Inventory, limit := INT_MAX):
 	if not multiplayer.is_server():
-		transaction_to_rpc.rpc_id(1, inventory.get_path())
+		transaction_to_rpc.rpc_id(1, inventory.get_path(), limit)
 	else:
-		transaction_to_rpc(inventory.get_path())
+		transaction_to_rpc(inventory.get_path(), limit)
 
 
 ## === CLIENT COMMANDS TO SERVER ===
@@ -177,7 +177,7 @@ func to_transaction_rpc(slot_index : int, object_path : NodePath, amount : int):
 
 
 @rpc("any_peer")
-func transaction_to_at_rpc(slot_index : int, object_path : NodePath):
+func transaction_to_at_rpc(slot_index : int, object_path : NodePath, limit : int):
 	if not multiplayer.is_server():
 		return
 	var object = get_node(object_path)
@@ -186,11 +186,11 @@ func transaction_to_at_rpc(slot_index : int, object_path : NodePath):
 	var inventory = object as Inventory
 	if inventory == null:
 		return
-	super.transaction_to_at(slot_index, inventory)
+	super.transaction_to_at(slot_index, inventory, limit)
 
 
 @rpc("any_peer")
-func transaction_to_rpc(object_path : NodePath):
+func transaction_to_rpc(object_path : NodePath, limit : int):
 	if not multiplayer.is_server():
 		return
 	var object = get_node(object_path)
@@ -199,7 +199,7 @@ func transaction_to_rpc(object_path : NodePath):
 	var inventory = object as Inventory
 	if inventory == null:
 		return
-	super.transaction_to(inventory)
+	super.transaction_to(inventory, limit)
 
 
 @rpc("any_peer")
