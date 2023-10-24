@@ -2,7 +2,8 @@
 extends NodeInventorySystemBase
 class_name Hotbar
 
-signal selection_changed(selection_index)
+signal selection_changed(selection_index: int)
+signal item_selected(item: InventoryItem)
 
 
 @export var inventory : Inventory
@@ -34,6 +35,7 @@ func previous_item():
 func select_none():
 	selection_index = -1
 	selection_changed.emit(selection_index)
+	item_selected.emit(null)
 
 
 func set_selection_index(new_index : int):
@@ -44,6 +46,7 @@ func set_selection_index(new_index : int):
 	if selection_index != new_index:
 		selection_index = new_index
 		selection_changed.emit(selection_index)
+		item_selected.emit(get_selected_item())
 
 
 func has_valid_item_id() -> bool:
