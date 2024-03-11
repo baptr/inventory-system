@@ -52,6 +52,7 @@ func _ready():
 			value_color.visible = true
 		TYPE_OBJECT:
 			var picker = EditorResourcePicker.new()
+			picker.edited_resource = value
 			picker.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			picker.resource_changed.connect(_on_resource_changed)
 			$Control.add_child(picker)
